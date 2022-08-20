@@ -13,15 +13,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 app.secret_key='DKSRDKS'
 api =Api(app)
 jwt = JWT(app, authenticate, identity)
-@app.before_first_request
-def create_tables():
-    db.create_all()
 api.add_resource(Students,'/Students/database/<add_no>')
 api.add_resource(Database,'/Students/database')
 api.add_resource(Users,'/Students/database/users/<name>')
 api.add_resource(Results,'/Students/Results/<name>')
 
 if __name__ =="__main__":
-    from db import db
-    db.init_app(app)
     app.run(debug=True)
